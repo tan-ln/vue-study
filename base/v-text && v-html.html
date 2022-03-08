@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <h1> </h1>
+    <div id="app">
+        <span>{{message}}</span>=<span v-text="message"></span><br>
+
+        <span v-html="todo">{{todo}}</span>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+
+            data: {
+                message: 'vue',
+                todo: '<h3>hello world</h3>'
+            },
+
+            computed: {
+                
+            }
+        })
+
+    </script>
+</body>
+
+</html>

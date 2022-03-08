@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <h1>v-model 绑定数据源</h1>
+    <h2>双向数据绑定</h2>
+    <h3>v-model.lazy 懒加载：在鼠标移出点击时改变数据</h3>
+    <h3>v-model.number 输入字符串转为数字，但必须一开始是数字</h3>
+
+    <div id="app">
+        <p>原始文本信息：{{message}}</p>
+        
+        <br>
+        文本框：
+        <br>v-model
+        <input type="text" v-model="message" >
+        <br>v-model.lazy
+        <input type="text" v-model.lazy="message" >
+        <br>v-model.number
+        <input type="text" v-model.number="message" >
+        <br>v-model.trim
+        <input type="text" v-model.trim="message" >
+
+        
+        <hr>
+        文本域：
+        <textarea cols="30" rows="10" v-model="isTrue"></textarea>
+        <hr>
+        <h4>多选框绑定一个值</h4>
+        <input type="checkbox" id="isTrue" v-model="isTrue" />
+        <label for="isTrue">{{isTrue}}</label>
+
+        <hr>
+        <h4>多选框绑定数组</h4>
+
+        <input type="checkbox" id="tang" value="tang" v-model="names" />
+        <label for="tang">tang</label>
+        <input type="checkbox" id="song" value="song" v-model="names" />
+        <label for="song">song</label>
+        <input type="checkbox" id="yuan" value="yuan" v-model="names" />
+        <label for="yuan">yuan</label>
+        <br>
+        <p>{{names}}</p>
+
+        <hr>
+        <h4>单选框绑定</h4>
+        <input type="radio" id="male" value="男" v-model="sex">男
+        <input type="radio" id="female" value="女" v-model="sex">女
+        <br>
+        <p>您选择的性别是：{{sex}}</p>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+
+            data: {
+                message: 'hello',
+                isTrue: true,
+                names: [],
+                sex: ''
+            },
+            
+            methods: {
+                
+            },
+
+            computed: {
+                
+            }
+        })
+
+    </script>
+</body>
+
+</html>

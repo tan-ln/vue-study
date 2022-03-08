@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>{{ num }}</h2>
+        <button @click="add">add</button>
+    </div>
+
+    <script>
+
+        var addControl = {
+            updated() {
+                alert('数据发生变化，：' + this.num)
+            }
+        }
+
+        Vue.mixin({
+            updated()
+        })
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                num: 1
+            },
+            methods: {
+                add () {
+                    this.num++
+                }
+            },
+            mixins: [addControl]
+        })
+    </script>
+</body>
+</html>

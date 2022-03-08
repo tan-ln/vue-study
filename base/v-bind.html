@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <style>
+        .classA {
+            color: aquamarine;
+        }
+        .classB {
+            font-size: 150%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>v-bind 绑定标签属性</h1>
+    <h2>简写：v-bind:src="imgSrc" === :src="imgSrc"</h2>
+
+    <div id="app">
+        <img :src="imgSrc" width="200px">
+        <hr>
+        <div :class="className">1、绑定 class</div>
+        <div :class="{classA:isOk}">2、绑定 class 中判断</div>
+        <div :class="[classA, classB]">3、以数组形式绑定多个 class </div>
+        <div :class="isOk?classA:classB">4、三元运算符绑定 class </div>
+        <div :style="{color: color, fontSize: font}">5、绑定 style</div>
+        <div :style="styleObj">5、对象的形式绑定 style</div>
+
+        <div>
+            <input type="checkbox" id="isOk" v-model="isOk" />
+            <label for="isOk">isOk={{isOk}}</label>
+        </div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+
+            data: {
+                imgSrc:'https://www.google.com.hk/logos/doodles/2018/world-cup-2018-day-10-5086611401342976-5645478960037888-ssw.png',
+                className: 'classA',
+                isOk: false,
+                classA: 'classA',
+                classB: 'classB',
+                color: 'brown',
+                font: '24px',
+                styleObj: {
+                    color: 'skyblue',
+                    fontSize: '28px',
+                },
+            },
+            
+            methods: {
+                
+            },
+
+            computed: {
+                
+            }
+        })
+
+    </script>
+</body>
+
+</html>

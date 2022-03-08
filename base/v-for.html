@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-for 模板循环</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <h1>v-for 必须使用特定语法 alias in expression ，为当前遍历的元素提供别名：</h1>
+    <div id="app">
+        <ul>
+            <li v-for="item in sortItems">
+                {{item}}
+            </li>
+        </ul>
+        <ul>
+            <li v-for="(student, i) in sortStudents">
+                {{i}}: {{student.name}}-{{student.age}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+
+            data: {
+                items: [20, 23, 18, 65, 32, 19, 5, 56, 41],
+                students: [
+                    {
+                        name: '张三',
+                        age: 33,
+                    },
+                    {
+                        name: '李四',
+                        age: 23,
+                    },
+                    {
+                        name: '王五',
+                        age: 26,
+                    },
+                    {
+                        name: '赵六',
+                        age: 19,
+                    },
+                ]
+            },
+
+            computed: {
+                sortItems: function () {
+                    return this.items.sort(sortNumber)
+                },
+                sortStudents: function() {
+                    return sortByKey(this.students, 'age')
+                }
+            }
+        })
+
+        function sortNumber(a, b) {
+            return a - b
+        }
+        //数组对象方法（根据key）排序:
+        function sortByKey(arr, key) {
+            return arr.sort(function(a, b) {
+                let x = a[key],
+                    y = b[key]
+                return ((x<y) ? -1 : (x>y) ? 1 : 0 )
+            })
+        }
+    </script>
+</body>
+
+</html>

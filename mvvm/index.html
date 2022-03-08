@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MVVM</title>
+</head>
+
+<body>
+    <!--组件 VUE本质： MVVM
+    data-binding
+    template  compile -->
+    <!-- 支持对{{}}的解析，template compile  
+        {{key}} <- data{key: value}对key进行回填 
+        1.找 坑 2 填 值
+     -->
+    <div id="app">
+        <!-- 待编译的模板 template-->
+        <h3>姓 名</h3>
+        <p>我的名字{{name}}</p>
+        <h3>年龄</h3>
+        <p>{{age}}</p>
+        <div class="msg">
+            <p>{{msg}}</p>
+        </div>
+    </div>
+    <script>
+        class Vue {
+            // el(根节点) vue 发生作用的节点
+            constructor(opt) {
+                this.opt = opt;
+                this.root = document.querySelector(opt.el);
+                this.compile(this.root);
+            }
+            //  进行模板编译 遍历节点 找到{{}} 匹配其中所有.*
+            compile(node) {
+                // {{}}
+                // console.log(node.childNodes)
+                [].forEach.call(node.childNodes, child =>{
+                    // console.log(child.innerHTML);
+                    // if(child.innerHTML == '{{name}}'){
+                        // 粗略的做法
+                    //     child.innerHTML = this.opt.data.name
+                    // }
+                    // 利用正则 去查找含有{{}} 再进行替换 replace();
+                    if(!child.firstElementChild && /\{\{(.*)\}\}/.test(child.innerHTML)){
+                        // firstElementChild API？？怎么理解 只返回元素节点，不包括文本节点、注释节点。
+                        // 正则中的()表示一个分组 可以通过$1 $2.. 获取其中key
+
+                        console.log(RegExp.$1);
+                        let key = RegExp.$1;
+                       child.innerHTML = child.innerHTML.replace(/\{\{(.*)\}\}/, this.opt.data[key]);
+                    //    child.firstElementChild.compile();
+                    }else if (child.firstElementChild){
+                        this.compile(child);
+                    }
+                })
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            // 尽快编译 不能让用户看到
+            let options = {
+                el: '#app',
+                data: {
+                    name: '检索中...',
+                    age: 30,
+                    msg: 'Vue 高手， 月薪5万'
+                }
+            }
+            new Vue(options)
+        });
+    </script>
+</body>
+
+</html>
