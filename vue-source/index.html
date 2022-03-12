@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue 依赖收集</title>
+</head>
+<body>
+    <div id="app">
+        <h2>{{title}}</h2>
+        <input v-model="name" />
+        <h1>{{name}}</h1>
+        <button v-on:click="clickMe">click me!</button>
+    </div>
+
+    <script src="./js/compile.js"></script>
+    <!-- 观察者模式 -->
+    <script src="./js/observer.js"></script>
+    <!-- vue 对象 -->
+    <script src="./js/index.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                title: 'hello world',
+                name: '布里啾啾利不利多'
+            },
+            // 生命周期 组件挂载 render 后 函数执行，顺序在 compile 等之后执行
+            mounted: function() {
+                window.setTimeout(() => {
+                    // console.log(this.title)   // undefined 数据在 data 而不是 this
+                    this.title = '你好'
+                    // console.log(this.title)  // 你好
+                }, 1000)
+            },
+            methods: {
+                clickMe () {
+                    console.log('clicked')
+                    this.title = 'konniqiwa'
+                }
+            }
+        })    
+        console.log(vm)
+    </script>
+</body>
+</html>

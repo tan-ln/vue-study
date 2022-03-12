@@ -1,0 +1,25 @@
+$blue = #3190e8
+$bc = #141414
+$fc = #fff
+// 任何一个盒子可能都要复用的css
+wh($width, $height)
+    width $width 
+    height $height
+sc($fz, $color)
+    font-size $fz
+    color $color
+ct()
+    position absolute
+    top 50%
+    transform translateY(-50%)
+    
+// 默认值 实质是正则替换
+fj($type=space-between)
+    display flex
+    justify-content $type
+
+center()
+    position absolute
+    left 50%
+    top 50%
+    transform translate(-50%, -50%)
